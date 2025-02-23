@@ -1,25 +1,19 @@
 import pymysql
 
-class DBConnection:
+class DBConnector:
+
     def __init__(self, dbconfig: dict):
         self._dbconfig = dbconfig
         self._connection = self._set_connection()
         self._cursor = self._set_cursor()
 
     def _set_connection(self):
-        connecion = pymysql.connect(**self._dbconfig)
-        return connecion
+        connection = pymysql.connect(**self._dbconfig)
+        return connection
 
     def _set_cursor(self):
         cursor = self._connection.cursor()
         return cursor
-    
-    def commit(self):
-        try:
-            self._connection.commit()
-        except pymysql.Error as e:
-            print(e.msg)
-            self._connection.rollback()
 
     def get_connection(self):
         return self._connection
@@ -28,6 +22,6 @@ class DBConnection:
         return self._cursor
 
     def close(self):
-        if self._connection.open:
+        if self._connection in locals():
             self._cursor.close()
             self._connection.close()

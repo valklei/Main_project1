@@ -1,16 +1,13 @@
-# This is a sample Python script.
+from db_config import dbconfig
+from user_interface import FilmSearchApp
+from query_manager import QueryHandler
+import tkinter as tk
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+def main():
+    root = tk.Tk()
+    query_handler = QueryHandler(dbconfig)
+    app = FilmSearchApp(root, query_handler)
+    root.mainloop()
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+if __name__ == "__main__":
+    main()
